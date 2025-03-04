@@ -3,4 +3,72 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+
+    <welcome-file-list>
+        <welcome-file>adminSignup.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>EmployeeListServlet</servlet-name>
+        <servlet-class>com.example.employeems.controllers.EmployeeListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeListServlet</servlet-name>
+        <url-pattern>/employee/list</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EmployeeController</servlet-name>
+        <servlet-class>com.example.employeems.controllers.EmployeeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeController</servlet-name>
+        <url-pattern>/employee/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EmployeeUpdateController</servlet-name>
+        <servlet-class>com.example.employeems.controllers.EmployeeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeUpdateController</servlet-name>
+        <url-pattern>/employee/update</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SignUp</servlet-name>
+        <servlet-class>com.example.employeems.controllers.AdminSignupServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignUp</servlet-name>
+        <url-pattern>/admin/signup</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.example.employeems.controllers.AdminLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/admin/login</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.example.employeems.controllers.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/admin/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EmployeeUpdateServlet</servlet-name>
+        <servlet-class>com.example.employeems.controllers.EmployeeUpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmployeeUpdateServlet</servlet-name>
+        <url-pattern>/employee</url-pattern>
+    </servlet-mapping>
+
 </web-app>

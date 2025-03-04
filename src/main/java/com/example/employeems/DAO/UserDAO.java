@@ -1,4 +1,8 @@
 package com.example.employeems.DAO;
 
-public class UserDAO {
+import com.example.employeems.models.User;
+
+public interface UserDAO {
+    void addAdmin(User admin);
+    User getAdminByUsernameAndPassword(String username, String password);
 }

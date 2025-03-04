@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/employee")
 public class EmployeeUpdateServlet extends HttpServlet {
     private EmployeeService employeeService;
 
@@ -43,16 +42,14 @@ public class EmployeeUpdateServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/employee");
     }
 
-    // Edit employee - Populate the form for editing
     private void editEmployee(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int employeeId = Integer.parseInt(request.getParameter("id"));
         Employee employee = employeeService.getEmployeeById(employeeId);
         request.setAttribute("employee", employee);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/employee/edit.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath()+"/employee/update");
         dispatcher.forward(request, response);
     }
 
-    // Do Post for updating employee
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -71,8 +68,18 @@ public class EmployeeUpdateServlet extends HttpServlet {
         String department = request.getParameter("department");
         int salary = Integer.parseInt(request.getParameter("salary"));
 
+        // Check if position is null or empty, and set a default value if necessary
+        if (position == null || position.trim().isEmpty()) {
+            position = "Unknown";  // Set a default value or handle accordingly
+        }
+
+        // Create the Employee object
         Employee employee = new Employee(id, firstName, lastName, position, department, salary);
+
+        // Call the service to update the employee
         employeeService.updateEmployee(employee);
-        response.sendRedirect(request.getContextPath() + "/employee");
+
+        // Redirect to the employee list page
+        response.sendRedirect(request.getContextPath() + "/employee/list");
     }
 }
