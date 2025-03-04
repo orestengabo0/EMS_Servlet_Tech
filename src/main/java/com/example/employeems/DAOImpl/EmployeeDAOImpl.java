@@ -83,12 +83,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public void updateEmployee(Employee employee) {
+        // Check if the position is null or empty and set a default value
+        if (employee.getPosition() == null || employee.getPosition().trim().isEmpty()) {
+            employee.setPosition("Unknown");  // You can set a default value like "Unknown"
+        }
+
         String sql = "UPDATE employees SET first_name = ?, last_name = ?, position = ?, department = ?, salary = ? WHERE id = ?";
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, employee.getFirstName());
             preparedStatement.setString(2, employee.getLastName());
-            preparedStatement.setString(3, employee.getPosition());
+            preparedStatement.setString(3, employee.getPosition()); // Ensure position is not null
             preparedStatement.setString(4, employee.getDepartment());
             preparedStatement.setInt(5, employee.getSalary());
             preparedStatement.setInt(6, employee.getId());

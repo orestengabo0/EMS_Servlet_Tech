@@ -25,15 +25,6 @@
         <servlet-name>EmployeeController</servlet-name>
         <url-pattern>/employee/create</url-pattern>
     </servlet-mapping>
-
-    <servlet>
-        <servlet-name>EmployeeUpdateController</servlet-name>
-        <servlet-class>com.example.employeems.controllers.EmployeeController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>EmployeeUpdateController</servlet-name>
-        <url-pattern>/employee/update</url-pattern>
-    </servlet-mapping>
     
     <servlet>
         <servlet-name>SignUp</servlet-name>
@@ -68,7 +59,16 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>EmployeeUpdateServlet</servlet-name>
-        <url-pattern>/employee</url-pattern>
+        <url-pattern>/employee/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteEmployeeServlet</servlet-name>
+        <servlet-class>com.example.employeems.controllers.EmployeeDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteEmployeeServlet</servlet-name>
+        <url-pattern>/employee/delete</url-pattern>
     </servlet-mapping>
 
 </web-app>

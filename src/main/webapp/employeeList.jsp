@@ -153,6 +153,35 @@
                 document.getElementById('salary').value = button.getAttribute('data-salary');
             });
         });
+
+        // Handle the form submission via AJAX
+        const editForm = document.getElementById('editEmployeeForm');
+        if (editForm) {
+            editForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Get form data
+                const formData = new FormData(editForm);
+
+                // Send data using Fetch API
+                fetch('<%= request.getContextPath() %>/employee/update', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Optionally show a success message or update the page dynamically
+                            alert('Employee updated successfully!');
+                            location.reload(); // Reload the page to reflect changes
+                        } else {
+                            alert('Failed to update employee.');
+                        }
+                    })
+                    .catch(error => {
+                        alert('Error: ' + error.message);
+                    });
+            });
+        }
     });
 </script>
 

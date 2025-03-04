@@ -46,7 +46,7 @@ public class EmployeeUpdateServlet extends HttpServlet {
         int employeeId = Integer.parseInt(request.getParameter("id"));
         Employee employee = employeeService.getEmployeeById(employeeId);
         request.setAttribute("employee", employee);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath()+"/employee/update");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/employee/list.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -68,18 +68,16 @@ public class EmployeeUpdateServlet extends HttpServlet {
         String department = request.getParameter("department");
         int salary = Integer.parseInt(request.getParameter("salary"));
 
-        // Check if position is null or empty, and set a default value if necessary
-        if (position == null || position.trim().isEmpty()) {
-            position = "Unknown";  // Set a default value or handle accordingly
-        }
-
-        // Create the Employee object
         Employee employee = new Employee(id, firstName, lastName, position, department, salary);
 
-        // Call the service to update the employee
         employeeService.updateEmployee(employee);
 
-        // Redirect to the employee list page
-        response.sendRedirect(request.getContextPath() + "/employee/list");
+        // If it's an AJAX request, send a response instead of redirecting
+        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+            response.setStatus(HttpServletResponse.SC_OK); // Respond with success
+        } else {
+            response.sendRedirect(request.getContextPath() + "/employee/list");
+        }
     }
 }
+
